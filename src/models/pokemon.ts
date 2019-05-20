@@ -1,11 +1,5 @@
 import {Attack} from "./attack";
-
-enum Stage {
-    Rose = 1,
-    GreatlyRose = 2,
-    Fell = -1,
-    GreatlyFell = -2
-}
+import {Stage} from "./stage";
 
 export class Pokemon {
 
@@ -38,11 +32,11 @@ export class Pokemon {
         return this.speed > pokemon.speed;
     }
 
-    attack(pokemon: Pokemon, attack: Attack = this.randomAttack, logMode: string = ''): void {
+    attack(pokemon: Pokemon, attack: Attack = this.randomAttack): void {
         this.attackUsed.push(attack);
         pokemon.life -= attack.damages;
-        if (logMode === '') console.log(`${this.name} attack ${pokemon.name} with ${attack.name} for ${attack.damages} !`);
-        if (!pokemon.isAlive) if (logMode === '') console.log(`${pokemon.name} died.`);
+        console.log(`${this.name} attack ${pokemon.name} with ${attack.name} for ${attack.damages} !`);
+        if (!pokemon.isAlive) console.log(`${pokemon.name} died.`);
     }
 
     haveAttack(name: string): boolean {
@@ -68,9 +62,6 @@ export class Pokemon {
 
     get speed(): number {
         let speed = this.initialSpeed;
-        if (this.currentStatStage !== undefined) {
-            speed = this.initialSpeed * this.currentStatStage;
-        }
         if (this.paralyzed && !this.haveAttack('Quick Feet')) {
             speed /= 2;
         }
