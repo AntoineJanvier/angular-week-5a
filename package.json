@@ -4,7 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "tsc && clear && nodejs ./dist/app.js"
     },
     "repository": {
         "type": "git",
@@ -15,5 +16,8 @@
     "bugs": {
         "url": "https://github.com/AntoineJanvier/angular-week-5a/issues"
     },
-    "homepage": "https://github.com/AntoineJanvier/angular-week-5a#readme"
+    "homepage": "https://github.com/AntoineJanvier/angular-week-5a#readme",
+    "devDependencies": {
+        "typescript": "^3.4.5"
+    }
 }
