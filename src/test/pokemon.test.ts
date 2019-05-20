@@ -16,6 +16,7 @@ describe('Speed', () => {
     it('should be faster than Groudon', () => {
         let evoli = new Pokemon('Evoli', 30);
         let groudon = new Pokemon('Groudon', 10);
+        console.log(evoli.speed, groudon.speed);
         expect(evoli.isFasterThan(groudon)).toBe(true);
     });
     it('should not be faster than Evoli', () => {
@@ -61,6 +62,23 @@ describe('Attacks', () => {
         let attack = new Attack('Shadow Ball', 80);
         evoli.attack(groudon, attack, 'TEST');
         expect(evoli.lastAttackUsed.name).toBe(attack.name);
+    });
+    it('should have Shadow Ball attack in list', () => {
+        let evoli = new Pokemon('Evoli', 30);
+        evoli.addAttacks([
+            new Attack('Tails', 100),
+            new Attack('Shadow Ball', 80),
+            new Attack('Sharp Attack', 85)
+        ]);
+        expect(evoli.haveAttack('Shadow Ball')).toBe(true);
+    });
+    it('should not have Shadow Ball attack in list', () => {
+        let evoli = new Pokemon('Evoli', 30);
+        evoli.addAttacks([
+            new Attack('Tails', 100),
+            new Attack('Sharp Attack', 85)
+        ]);
+        expect(evoli.haveAttack('Shadow Ball')).toBe(false);
     });
     it('should get an attack in pokemon\'s attack list', () => {
         let evoli = new Pokemon('Evoli', 30);

@@ -1,5 +1,12 @@
 import {Attack} from "./attack";
 
+enum Stage {
+    Rose = 1,
+    GreatlyRose = 2,
+    Fell = -1,
+    GreatlyFell = -2
+}
+
 export class Pokemon {
 
     currentSpeed: number;
@@ -7,6 +14,8 @@ export class Pokemon {
     attacks: Attack[];
     attackUsed: Attack[];
     life: number;
+    currentStatStage: Stage;
+    paralyzed: boolean;
 
     constructor(public name: string, public initialSpeed: number = 0, life: number = 500) {
         this.currentSpeed = initialSpeed;
@@ -14,6 +23,7 @@ export class Pokemon {
         this.attacks = [];
         this.attackUsed = [];
         this.life = life;
+        this.paralyzed = false;
     }
 
     addAttack(attack: Attack): void {
@@ -35,12 +45,17 @@ export class Pokemon {
         if (!pokemon.isAlive) if (logMode === '') console.log(`${pokemon.name} died.`);
     }
 
-    get randomAttack() {
-        return this.attacks[Math.floor(Math.random() * this.attacks.length)];
+    haveAttack(name: string): boolean {
+        for (let attack of this.attacks) {
+            if (attack.name === name) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    get speed(): number {
-        return this.initialSpeed * this.currentSpeed;
+    get randomAttack() {
+        return this.attacks[Math.floor(Math.random() * this.attacks.length)];
     }
 
     get lastAttackUsed(): Attack {
@@ -49,5 +64,19 @@ export class Pokemon {
 
     get isAlive(): boolean {
         return this.life > 0;
+    }
+
+    get speed(): number {
+        let speed = this.initialSpeed;
+        if (this.currentStatStage !== undefined) {
+            speed = this.initialSpeed * this.currentStatStage;
+        }
+        if (this.paralyzed && !this.haveAttack('Quick Feet')) {
+            speed /= 2;
+        }
+        if (this.currentStatStage < 0 && this.haveAttack('Quick Feet')) {
+            speed *= 1.5;
+        }
+        return speed;
     }
 }
