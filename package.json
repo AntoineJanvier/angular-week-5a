@@ -1,0 +1,19 @@
+{
+    "name": "angular-week-5a",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AntoineJanvier/angular-week-5a.git"
+    },
+    "author": "AntoineJanvier",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/AntoineJanvier/angular-week-5a/issues"
+    },
+    "homepage": "https://github.com/AntoineJanvier/angular-week-5a#readme"
+}
