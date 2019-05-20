@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "tsc && clear && nodejs ./dist/app.js",
+        "start": "npm test && tsc && nodejs ./dist/app.js",
         "test": "jest"
     },
     "repository": {
